@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CryptoBot</title>
+  <style>
+  #coin-list {
+    list-style: none;
+  }
+  .list-item {
+    border: 1px solid gray;
+    padding: 5px;
+    margin: 5px;
+    width: 70%;
+  }
+  </style>
+  </head>
+  <body>
+    <section>
+      <h1>Add Coin</h1>
+      <form id="get-symbol">
+        <div>
+          <label for="base">Base Currency</label>
+          <input type="text" id="base" name="base" />
+        </div>
+        <div>
+          <label for="quote">Quote Currency</label>
+          <input type="text" id="quote" value="BTC" name="quote" />
+        </div>
+        <div>
+          <label for="quote">Buy Percentage</label>
+          <input type="text" id="buy-perc" value="10" name="buy-perc" />
+        </div>
+        <input type="submit" />
+      </form>
+    </section>
+    <section>
+      <ul id="coin-list">
+        
+      </ul>
+    <button id="coin-list_refresh">Refresh</button>
+    </section>
+    <script src="{{url_for('static', path='script.js')}}"></script>
+  </body>
+</html>
