@@ -1,6 +1,12 @@
 # Binance Bot For Trailing Stop Loss (TSL) With Webgui (For Pumps)
 
-*barebones (prototype)*
+- Binance is a cryptocurrency exchange that provides a platform for trading various cryptocurrencies.
+
+*barebones (prototype) - unstable*
+**How to**
+1. `pip install -r requirements.txt`
+2. `set binance API_KEY, SECRET_KEY as environment variables`
+3. `uvicorn cryptoserve.cryptoserve:app`
 
 **Features**
 1. Trade Any Asset Pair That Binance Supports
@@ -15,6 +21,9 @@
    
 6. Multiple Coins/TSLs At The Same Time
 7. Very Minimal Web Gui (Proto)
+---
+**Screenshot**<br>
+<img src="screen.png" width="400px">
 ___
 *Dependencies*
 - requests==2.22.0
@@ -22,3 +31,6 @@ ___
 - unicorn_binance_websocket_api==1.29.0
 - starlette==0.14.1
 - binance==0.3
+- aiofiles==0.7.0
+- python-dotenv==0.19.0
+- uvicorn==0.14.0

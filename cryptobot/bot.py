@@ -1,15 +1,14 @@
 import requests, math
 from cryptobot.TSL import TrailingStopLoss
-import json
 from binance.client import Client
 from unicorn_binance_websocket_api.unicorn_binance_websocket_api_manager import BinanceWebSocketApiManager
+import dotenv
+import os
 
 class CryptoAsset:
-    with open('/home/kronos/secret.json', 'r') as jsonfile:
-        secrets = json.load(jsonfile)
-    
-    API_KEY = secrets['API_KEY']
-    SECRET_KEY = secrets['SECRET_KEY']
+    dotenv.load_dotenv()
+    API_KEY = os.environ.get('API_KEY')
+    SECRET_KEY = os.environ.get('SECRET_KEY')
 
     CLIENT = Client(API_KEY, SECRET_KEY)
 
@@ -106,6 +105,7 @@ class CryptoAsset:
         trade_amount = percentage_of_quote / 100
         quantity = self.quote_currency_balance / self.initial_price * trade_amount
         quantity = float(round(quantity, self.quantity_precision))
+        print(quantity)
         buy_order = self.CLIENT.order_market_buy(
         symbol=self.symbol,
         quantity=str(quantity))
@@ -191,7 +191,7 @@ class CryptoAsset:
         self.tsl.start()
 
     def stop_TSL(self):
-        if not self.is_TSL_alive():
+        if self.is_TSL_alive():
             self.tsl.stop()
 
     def is_TSL_alive(self):

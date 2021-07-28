@@ -36,15 +36,18 @@ coin_list_refresh.addEventListener("click", (event) => {
       coin_list.innerHTML = "";
       for (const coin in response) {
         let listitem = document.createElement("li");
-        listitem.className = "list-item";
+        listitem.className = "list-item p-3 flex flex-col";
         let heading = document.createElement("p");
+        heading.className = "font-bold text-xl"
         heading.innerHTML = coin + " - " + response[coin];
         let base, quote;
         [base, quote] = coin.split(" ");
         let buy_form = document.createElement("form");
-
+        buy_form.className = "flex flex-col gap-3"
         let stop_tsl = document.createElement("button");
-        stop_tsl.innerHTML = "stop tsl";
+        stop_tsl.innerHTML = "STOP TSL";
+        stop_tsl.className =
+          "p-1 font-bold bg-blue-600 text-gray-100 rounded-md";
         stop_tsl.addEventListener("click", (event) => {
           fetch(
             "/stoptsl?" +
@@ -56,6 +59,7 @@ coin_list_refresh.addEventListener("click", (event) => {
         });
 
         let sell_all = document.createElement("button");
+        sell_all.className = 'p-1 font-bold bg-blue-600 text-gray-100 rounded-md';
         sell_all.addEventListener("click", (event) => {
           fetch(
             "/sellall?" +
@@ -66,7 +70,7 @@ coin_list_refresh.addEventListener("click", (event) => {
           );
         });
 
-        sell_all.innerHTML = "sell all";
+        sell_all.innerHTML = "SELL ALL";
 
         let base_input = document.createElement("input");
         base_input.name = "base";
@@ -76,25 +80,27 @@ coin_list_refresh.addEventListener("click", (event) => {
         quote_input.value = quote;
         base_input.type = quote_input.type = "hidden";
 
-        let buyelem = `<div>
+        let buyelem = `<div class="flex flex-col">
             <label for="buy_percentage">Percentage (BUY)</label>
-            <input id="but=y_percentage" name="buy_percentage" type="text" value="10"/>
+            <input class="font-bold p-1 text-green-500" id="buy_percentage" name="buy_percentage" type="text" value="10"/>
             <div>
             `;
-        let tsl = `<div>
+        let tsl = `<div class="flex flex-col">
             <label for="follow_percentage">TSL Follow percent</label>
-            <input id="follow_percentage" name="follow_percentage" type="text" value="10"/>
+            <input class="font-bold p-1 text-green-500" id="follow_percentage" name="follow_percentage" type="text" value="10"/>
             </div>
-            <div>
+            <div class="flex flex-col">
             <label for="safety_percentage">TSL Safety percent</label>
-            <input id="safety_percentage" name="safety_percentage" type="text" value="1"/>
+            <input class="font-bold p-1 text-green-500" id="safety_percentage" name="safety_percentage" type="text" value="1"/>
             </div>
             `;
         let button = document.createElement("button");
         button.type = "submit";
+        button.className = "p-1 font-bold bg-blue-600 text-gray-100 rounded-md";
         button.innerText = "Buy/TSL";
         let close_button = document.createElement("button");
-        close_button.innerHTML = "remove";
+        close_button.innerHTML = "REMOVE";
+        close_button.className = 'p-1 font-bold bg-blue-600 text-gray-100 rounded-md';
         close_button.addEventListener("click", (event) => {
           fetch(
             "/removecoin?" +
@@ -104,34 +110,33 @@ coin_list_refresh.addEventListener("click", (event) => {
               })
           );
         });
-        listitem.style.display = "flex";
-        listitem.style.gap = '10px';
         let contain1 = document.createElement("section");
         let contain2 = document.createElement("section");
-        
+        contain1.className = "flex flex-col gap-3"
+        contain2.className = "flex flex-col gap-3"
         contain2.innerHTML = `
-        <form id="multi-limit">
+        <form class="flex flex-col gap-2 my-2" id="multi-limit">
           <input type="hidden" name="base" value="${base}"/>
           <input type="hidden" name="quote" value="${quote}"/>
-          <div>
+          <div class="flex flex-col">
           <label for="sell-percent">Sell Percentages</label>
-          <input id="sell-percent" type="text" name="sell-perc"/>
+          <input class="p-1 font-bold text-green-500" id="sell-percent" type="text" name="sell-perc"/>
           </div>
-          <div>
+          <div class="flex flex-col">
           <label for="sell-quantity">Sell Quantities</label>
-          <input id="sell-quantitiy" type="text" name="sell-quant"/>
+          <input class="p-1 font-bold text-green-500" id="sell-quantitiy" type="text" name="sell-quant"/>
           </div>
-          <button type="submit">Set Limits</button>
+          <button class="p-1 font-bold bg-blue-600 text-gray-100 rounded-md" type="submit">Set Limits</button>
           </form>
-        `
-        let multi_form = contain2.querySelector('#multi-limit');
-        multi_form.addEventListener('submit', event => {
+        `;
+        let multi_form = contain2.querySelector("#multi-limit");
+        multi_form.addEventListener("submit", (event) => {
           event.preventDefault();
           event.stopPropagation();
-          fetch('/multilimit', {
+          fetch("/multilimit", {
             method: "POST",
             body: new FormData(multi_form),
-          });  
+          });
         });
 
         buy_form.appendChild(heading);

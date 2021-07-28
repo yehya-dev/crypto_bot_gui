@@ -4,43 +4,39 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
     <title>CryptoBot</title>
   <style>
   #coin-list {
     list-style: none;
   }
-  .list-item {
-    border: 1px solid gray;
-    padding: 5px;
-    margin: 5px;
-    width: 70%;
-  }
   </style>
   </head>
-  <body>
+  <body class="bg-gray-50 text-gray-800">
     <section>
-      <h1>Add Coin</h1>
-      <form id="get-symbol">
-        <div>
-          <label for="base">Base Currency</label>
-          <input type="text" id="base" name="base" />
+    <div class="bg-gray-200 shadow-md p-2 font-bold text-blue-600 text-xl text-center">
+      <h1>CryptoBot</h1>
+    </div>
+      <form id="get-symbol" class="shadow-md mx-auto my-10 w-1/2 flex gap-2 flex-col bg-gray-200 p-4">
+        <div class="flex-col flex">
+          <label class="font-bold text-gray-800 my-1" for="base">Base Currency</label>
+          <input class="p-1 font-bold text-green-500" type="text" id="base" name="base" />
         </div>
-        <div>
-          <label for="quote">Quote Currency</label>
-          <input type="text" id="quote" value="BTC" name="quote" />
+        <div class="flex-col flex text-gray-800 my-1">
+          <label class="font-bold" for="quote">Quote Currency</label>
+          <input class="p-1 font-bold text-green-500" type="text" id="quote" value="BTC" name="quote" />
         </div>
-        <div>
-          <label for="quote">Buy Percentage</label>
-          <input type="text" id="buy-perc" value="10" name="buy-perc" />
+        <div class="flex-col flex text-gray-800 my-1">
+          <label class="font-bold" for="quote">Buy Percentage</label>
+          <input class="p-1 font-bold text-green-500" type="text" id="buy-perc" value="10" name="buy-perc" />
         </div>
-        <input type="submit" />
+        <input class="mx-auto my-3 block px-3 py-1 bg-blue-600 text-gray-200 font-bold rounded-md" type="submit" />
       </form>
     </section>
     <section>
-      <ul id="coin-list">
-        
+      <ul id="coin-list" class="w-2/3 mx-auto bg-gray-200 rounded-md text-gray-800 font-bold my-3">
       </ul>
-    <button id="coin-list_refresh">Refresh</button>
+    <button class="mx-auto block px-3 py-1 bg-blue-600 text-gray-200 font-bold rounded-md" id="coin-list_refresh">Refresh</button>
     </section>
     <script src="{{url_for('static', path='script.js')}}"></script>
   </body>
